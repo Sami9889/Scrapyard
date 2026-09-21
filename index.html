@@ -6,7 +6,7 @@
     <meta name="description" content="Scrapyard Printers - Build a real 3D printer almost entirely from junk. A Hack Club YSWS event where you get $250 and strict limits—everything else must be scavenged from e-waste, scrapyards, and flea markets.">
     <meta name="theme-color" content="#ec3750">
     <title>Scrapyard Printers | Hack Club YSWS</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖨️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>P</text></svg>">
     <style>
         html {
             scroll-behavior: smooth;
@@ -276,7 +276,7 @@
         }
 
         .card li::before {
-            content: "➔";
+            content: "-";
             position: absolute;
             left: 0;
             color: var(--hc-red);
@@ -617,8 +617,8 @@
 
     <div class="wrapper">
         <nav aria-label="Main navigation">
-            <div class="nav-badge">📍 Hack Club YSWS</div>
-            <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()" aria-label="Toggle navigation menu">☰</button>
+            <div class="nav-badge">Hack Club YSWS</div>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()" aria-label="Toggle navigation menu">MENU</button>
             <div class="nav-links" id="navLinks">
                 <a href="#rules" class="nav-link">Rules</a>
                 <a href="#checker" class="nav-link">Part Checker</a>
@@ -628,10 +628,11 @@
         </nav>
 
         <header class="hero" id="main-content">
-            <span class="tag-pill">⚙️ Youth-Spurred Hardware</span>
+            <span class="tag-pill">Youth-Spurred Hardware</span>
             <h1>Scrapyard Printers</h1>
             <p>Build a real 3D printer almost entirely from junk. You get $250 and strict limits—everything else must be scavenged from e-waste, scrapyards, and flea markets.</p>
-            <a href="https://hackclub.com/slack/" class="btn-cta" target="_blank" rel="noopener noreferrer" aria-label="Get Started on Slack (opens in new tab)">Get Started on Slack ➔</a>
+            <a href="https://hackclub.slack.com/archives/C0C3B9FKDDX" class="btn-cta" target="_blank" rel="noopener noreferrer" aria-label="Join Slack Channel (opens in new tab)">Join Slack Channel</a>
+            <a href="https://rsvp.hackclub.community/junkyard-printers" class="btn-cta" target="_blank" rel="noopener noreferrer" aria-label="RSVP on Hack Club (opens in new tab)" style="margin-left: 1rem; background-color: var(--cyan);">RSVP Now</a>
         </header>
 
         <section id="rules" aria-labelledby="rules-title">
@@ -691,13 +692,13 @@
             <h2 class="section-title" id="rewards-title">The Rewards</h2>
             <div class="rewards-container">
                 <div class="reward-box gold-coast">
-                    <span class="tag">✈️ Travel Grant</span>
+                    <span class="tag">Travel Grant</span>
                     <h3>Gold Coast Trip</h3>
                     <p>Log 40 hours of work building and documenting your Frankenstein machine, and Hack Club will fly you out to the Gold Coast!</p>
                 </div>
 
                 <div class="reward-box filament">
-                    <span class="tag">🏆 Grand Prize</span>
+                    <span class="tag">Grand Prize</span>
                     <h3>50kg of Filament</h3>
                     <p>The best, most creative, functional scrapyard printer built by a participant wins 50 kilograms of filament to supply a lifetime of printing.</p>
                 </div>
@@ -788,18 +789,18 @@
 
     <script>
         const partsDatabase = {
-            motherboard: { legal: true, text: "✅ ALLOWED NEW: You can spend your $250 grant on a new motherboard!" },
-            pi: { legal: true, text: "✅ ALLOWED NEW: Single board computers like a Raspberry Pi can be bought new!" },
-            extruder: { legal: true, text: "✅ ALLOWED NEW: Extruders can be bought new within your $250 grant limit." },
-            belts: { legal: true, text: "✅ ALLOWED NEW: GT2 belts are allowed new for precise movement." },
-            extrusion: { legal: true, text: "✅ ALLOWED NEW: Up to 10 meters of aluminium extrusion can be bought new." },
-            steppers: { legal: false, text: "❌ MUST BE JUNK: Stepper motors must be scavenged from old 2D printers, scanners, or eBay used!" },
-            powersupply: { legal: false, text: "❌ MUST BE JUNK: Power supplies must be salvaged from old PC towers or thrifted electronics!" },
-            leadscrews: { legal: false, text: "❌ MUST BE JUNK: Scavenge lead screws, threaded rods, or scavenged machinery parts!" },
-            frame: { legal: false, text: "❌ MUST BE JUNK / PRINTED: Frame brackets must be 3D printed or scavenged metal scraps!" },
-            bearings: { legal: false, text: "❌ MUST BE JUNK: Linear rods and bearings must come from thrifted hardware or old scrap!" },
-            heatedbed: { legal: false, text: "❌ MUST BE JUNK: Build a bed out of scrap metal or salvage a bed from a broken printer!" },
-            wiring: { legal: false, text: "❌ MUST BE JUNK: Strip old Ethernet cables, power supply cords, or appliance wiring!" }
+            motherboard: { legal: true, text: "ALLOWED NEW: You can spend your $250 grant on a new motherboard!" },
+            pi: { legal: true, text: "ALLOWED NEW: Single board computers like a Raspberry Pi can be bought new!" },
+            extruder: { legal: true, text: "ALLOWED NEW: Extruders can be bought new within your $250 grant limit." },
+            belts: { legal: true, text: "ALLOWED NEW: GT2 belts are allowed new for precise movement." },
+            extrusion: { legal: true, text: "ALLOWED NEW: Up to 10 meters of aluminium extrusion can be bought new." },
+            steppers: { legal: false, text: "MUST BE JUNK: Stepper motors must be scavenged from old 2D printers, scanners, or eBay used!" },
+            powersupply: { legal: false, text: "MUST BE JUNK: Power supplies must be salvaged from old PC towers or thrifted electronics!" },
+            leadscrews: { legal: false, text: "MUST BE JUNK: Scavenge lead screws, threaded rods, or scavenged machinery parts!" },
+            frame: { legal: false, text: "MUST BE JUNK / PRINTED: Frame brackets must be 3D printed or scavenged metal scraps!" },
+            bearings: { legal: false, text: "MUST BE JUNK: Linear rods and bearings must come from thrifted hardware or old scrap!" },
+            heatedbed: { legal: false, text: "MUST BE JUNK: Build a bed out of scrap metal or salvage a bed from a broken printer!" },
+            wiring: { legal: false, text: "MUST BE JUNK: Strip old Ethernet cables, power supply cords, or appliance wiring!" }
         };
 
         function checkPart() {
@@ -904,7 +905,7 @@
             navLinks.classList.toggle("open");
             const isExpanded = navLinks.classList.contains("open");
             navToggle.setAttribute("aria-expanded", isExpanded);
-            navToggle.textContent = isExpanded ? "✕" : "☰";
+            navToggle.textContent = isExpanded ? "X" : "MENU";
         }
 
         document.querySelectorAll(".nav-link").forEach(link => {
@@ -914,7 +915,7 @@
                 if (navLinks.classList.contains("open")) {
                     navLinks.classList.remove("open");
                     navToggle.setAttribute("aria-expanded", "false");
-                    navToggle.textContent = "☰";
+                    navToggle.textContent = "MENU";
                 }
             });
         });
