@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scrapyard Printers - Build a real 3D printer almost entirely from junk. A Hack Club YSWS event where you get $250 and strict limits—everything else must be scavenged from e-waste, scrapyards, and flea markets.">
+    <meta name="theme-color" content="#ec3750">
     <title>Scrapyard Printers | Hack Club YSWS</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖨️</text></svg>">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         :root {
             --bg: #fffdf5;
             --black: #000000;
@@ -14,7 +20,7 @@
             --green: #06d6a0;
             --cyan: #118ab2;
             --orange: #ff9f1c;
-            
+
             --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-mono: "Courier New", Courier, monospace;
             --shadow: 5px 5px 0px #000000;
@@ -43,6 +49,24 @@
         ::selection {
             background-color: var(--hc-red);
             color: var(--white);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--hc-red);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            z-index: 100;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-decoration: none;
+            border: var(--border);
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
 
         .wrapper {
@@ -94,6 +118,11 @@
             transform: translate(-2px, -2px);
             box-shadow: 5px 5px 0px #000;
             background: var(--yellow);
+        }
+
+        .nav-link:focus-visible {
+            outline: 2px solid var(--hc-red);
+            outline-offset: 2px;
         }
 
         .hero {
@@ -160,6 +189,11 @@
         .btn-cta:active {
             transform: translate(3px, 3px);
             box-shadow: 2px 2px 0px #000;
+        }
+
+        .btn-cta:focus-visible {
+            outline: 2px solid var(--yellow);
+            outline-offset: 2px;
         }
 
         .section-title {
@@ -249,6 +283,11 @@
             font-weight: bold;
         }
 
+        .card-description {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
         .rewards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -313,6 +352,11 @@
             text-transform: uppercase;
         }
 
+        .checker-description {
+            font-weight: 600;
+            color: #444;
+        }
+
         .checker-inputs {
             display: flex;
             gap: 1rem;
@@ -337,6 +381,11 @@
             background: var(--white);
         }
 
+        .checker-select:focus-visible, .checker-input:focus-visible {
+            outline: 2px solid var(--hc-red);
+            outline-offset: 2px;
+        }
+
         .verdict-box {
             padding: 1.2rem;
             border: var(--border);
@@ -345,6 +394,9 @@
             font-weight: bold;
             font-size: 1.05rem;
             background: var(--bg);
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
         }
 
         .faq-section {
@@ -368,9 +420,19 @@
             align-items: center;
             user-select: none;
             background: var(--white);
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
         }
 
         .faq-question:hover {
+            background-color: var(--bg);
+        }
+
+        .faq-question:focus-visible {
+            outline: 2px solid var(--hc-red);
+            outline-offset: -2px;
             background-color: var(--bg);
         }
 
@@ -378,6 +440,8 @@
             font-family: var(--font-mono);
             font-size: 1.4rem;
             font-weight: bold;
+            flex-shrink: 0;
+            margin-left: 1rem;
         }
 
         .faq-answer {
@@ -392,6 +456,10 @@
 
         .faq-item.active .faq-answer {
             display: block;
+        }
+
+        .faq-item.active .faq-question {
+            background-color: var(--bg);
         }
 
         footer {
@@ -422,14 +490,136 @@
             background-color: var(--hc-red);
             color: var(--white);
         }
+
+        .credit-link:focus-visible {
+            outline: 2px solid var(--hc-red);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .nav-toggle {
+            display: none;
+            background: var(--white);
+            border: var(--border);
+            box-shadow: 3px 3px 0px #000;
+            padding: 0.4rem 0.8rem;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .nav-toggle:hover {
+            background: var(--yellow);
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                flex-wrap: nowrap;
+            }
+        }
+
+        .nav-link.active {
+            background: var(--yellow);
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--hc-red);
+            color: var(--white);
+            border: var(--border);
+            box-shadow: var(--shadow);
+            padding: 0.6rem 1rem;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 50;
+            font-size: 0.9rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #d62d42;
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        @media print {
+            body {
+                background: white;
+                background-image: none;
+                padding: 0;
+            }
+
+            .back-to-top,
+            .nav-toggle,
+            .checker-widget,
+            .faq-section {
+                display: none;
+            }
+
+            .card,
+            .reward-box,
+            footer,
+            .hero {
+                box-shadow: none;
+                border: 1px solid #000;
+                break-inside: avoid;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div class="wrapper">
-        <nav>
+        <nav aria-label="Main navigation">
             <div class="nav-badge">📍 Hack Club YSWS</div>
-            <div class="nav-links">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()" aria-label="Toggle navigation menu">☰</button>
+            <div class="nav-links" id="navLinks">
                 <a href="#rules" class="nav-link">Rules</a>
                 <a href="#checker" class="nav-link">Part Checker</a>
                 <a href="#rewards" class="nav-link">Rewards</a>
@@ -437,15 +627,15 @@
             </div>
         </nav>
 
-        <header class="hero">
+        <header class="hero" id="main-content">
             <span class="tag-pill">⚙️ Youth-Spurred Hardware</span>
             <h1>Scrapyard Printers</h1>
             <p>Build a real 3D printer almost entirely from junk. You get $250 and strict limits—everything else must be scavenged from e-waste, scrapyards, and flea markets.</p>
-            <a href="https://hackclub.com/slack/" class="btn-cta" target="_blank">Get Started on Slack ➔</a>
+            <a href="https://hackclub.com/slack/" class="btn-cta" target="_blank" rel="noopener noreferrer" aria-label="Get Started on Slack (opens in new tab)">Get Started on Slack ➔</a>
         </header>
 
-        <section id="rules">
-            <h2 class="section-title">The Core Rules</h2>
+        <section id="rules" aria-labelledby="rules-title">
+            <h2 class="section-title" id="rules-title">The Core Rules</h2>
             <div class="grid-3">
                 <div class="card">
                     <div>
@@ -453,7 +643,7 @@
                             <span class="card-badge yellow">$250 Grant</span>
                         </div>
                         <h3>Buy New (Strict)</h3>
-                        <p style="margin-bottom: 0.8rem; font-weight: 600;">You are ONLY allowed to buy these components brand new:</p>
+                        <p class="card-description">You are ONLY allowed to buy these components brand new:</p>
                         <ul>
                             <li>Motherboard</li>
                             <li>Raspberry Pi</li>
@@ -470,7 +660,7 @@
                             <span class="card-badge green">Junk Only</span>
                         </div>
                         <h3>Scavenge The Rest</h3>
-                        <p style="margin-bottom: 0.8rem; font-weight: 600;">Everything else must come from used/salvaged sources:</p>
+                        <p class="card-description">Everything else must come from used/salvaged sources:</p>
                         <ul>
                             <li>eBay Used Listings</li>
                             <li>Thrift Shops & Yard Sales</li>
@@ -486,7 +676,7 @@
                             <span class="card-badge cyan">Custom CAD</span>
                         </div>
                         <h3>Print Missing Parts</h3>
-                        <p style="margin-bottom: 0.8rem; font-weight: 600;">Can't find a specific bracket, mount, or custom piece?</p>
+                        <p class="card-description">Can't find a specific bracket, mount, or custom piece?</p>
                         <ul>
                             <li>3D model your own custom parts</li>
                             <li>Print them on a friend's printer</li>
@@ -497,8 +687,8 @@
             </div>
         </section>
 
-        <section id="rewards">
-            <h2 class="section-title">The Rewards</h2>
+        <section id="rewards" aria-labelledby="rewards-title">
+            <h2 class="section-title" id="rewards-title">The Rewards</h2>
             <div class="rewards-container">
                 <div class="reward-box gold-coast">
                     <span class="tag">✈️ Travel Grant</span>
@@ -514,16 +704,16 @@
             </div>
         </section>
 
-        <section id="checker">
-            <h2 class="section-title">Part Legality Checker</h2>
+        <section id="checker" aria-labelledby="checker-title">
+            <h2 class="section-title" id="checker-title">Part Legality Checker</h2>
             <div class="checker-widget">
                 <div class="checker-header">
                     <h3>Is it legal to buy new?</h3>
-                    <p style="font-weight: 600; color: #444;">Select a component below to see if you can buy it new with your $250 grant or if you have to dig through junk!</p>
+                    <p class="checker-description">Select a component below to see if you can buy it new with your $250 grant or if you have to dig through junk!</p>
                 </div>
 
                 <div class="checker-inputs">
-                    <select id="partSelect" class="checker-select" onchange="checkPart()">
+                    <select id="partSelect" class="checker-select" aria-label="Select a component to check">
                         <option value="">-- Choose a component --</option>
                         <option value="motherboard">Main Control Board (Motherboard)</option>
                         <option value="pi">Raspberry Pi / Single Board Computer</option>
@@ -540,51 +730,51 @@
                     </select>
                 </div>
 
-                <div id="verdict" class="verdict-box">
+                <div id="verdict" class="verdict-box" role="status" aria-live="polite">
                     Select a part above to check the rule!
                 </div>
             </div>
         </section>
 
-        <section id="faq" class="faq-section">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">
+        <section id="faq" class="faq-section" aria-labelledby="faq-title">
+            <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFaq(this)">
                     <span>How do I log my 40 hours?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                    <span class="faq-toggle" aria-hidden="true">+</span>
+                </button>
+                <div id="faq-answer-1" class="faq-answer" hidden>
                     You'll keep a build log (using Hack Club's WakaTime or scrapbooking tools) where you share progress photos, video updates, CAD files, and time logs as you build your printer.
                 </div>
             </div>
 
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" onclick="toggleFaq(this)">
                     <span>What if I don't have a 3D printer to print missing custom parts?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                    <span class="faq-toggle" aria-hidden="true">+</span>
+                </button>
+                <div id="faq-answer-2" class="faq-answer" hidden>
                     You can ask a friend, use a local makerspace, school printer, or connect with other Hack Clubbers on Slack who can print parts for you!
                 </div>
             </div>
 
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" onclick="toggleFaq(this)">
                     <span>How do I prove my non-grant parts are scavenged?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                    <span class="faq-toggle" aria-hidden="true">+</span>
+                </button>
+                <div id="faq-answer-3" class="faq-answer" hidden>
                     Snap pictures of your thrift shop finds, eBay receipt screenshots showing 'Used/For Parts', or video clips of you pulling stepper motors out of 1990s 2D paper printers!
                 </div>
             </div>
 
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" onclick="toggleFaq(this)">
                     <span>Who can participate?</span>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                    <span class="faq-toggle" aria-hidden="true">+</span>
+                </button>
+                <div id="faq-answer-4" class="faq-answer" hidden>
                     High schoolers and teenagers in the Hack Club community worldwide. Join the Hack Club Slack to get started!
                 </div>
             </div>
@@ -592,12 +782,11 @@
 
         <footer>
             <p>Scrapyard Printers is a You Ship, We Ship (YSWS) event.</p>
-            <p>Created by <a href="#" class="credit-link">sami9889</a> & <a href="#" class="credit-link">Riley Wood</a> for <a href="https://hackclub.com" class="credit-link" target="_blank">Hack Club</a>.</p>
+            <p>Created by <a href="#" class="credit-link">sami9889</a> & <a href="#" class="credit-link">Riley Wood</a> for <a href="https://hackclub.com" class="credit-link" target="_blank" rel="noopener noreferrer" aria-label="Hack Club (opens in new tab)">Hack Club</a>.</p>
         </footer>
     </div>
 
     <script>
-        /* Part Checker Logic */
         const partsDatabase = {
             motherboard: { legal: true, text: "✅ ALLOWED NEW: You can spend your $250 grant on a new motherboard!" },
             pi: { legal: true, text: "✅ ALLOWED NEW: Single board computers like a Raspberry Pi can be bought new!" },
@@ -621,7 +810,7 @@
             if (!val) {
                 verdict.style.backgroundColor = "var(--bg)";
                 verdict.style.color = "var(--black)";
-                verdict.innerHTML = "Select a part above to check the rule!";
+                verdict.textContent = "Select a part above to check the rule!";
                 return;
             }
 
@@ -629,27 +818,108 @@
             if (item.legal) {
                 verdict.style.backgroundColor = "var(--green)";
                 verdict.style.color = "var(--black)";
-                verdict.innerHTML = item.text;
+                verdict.textContent = item.text;
             } else {
                 verdict.style.backgroundColor = "var(--hc-red)";
                 verdict.style.color = "var(--white)";
-                verdict.innerHTML = item.text;
+                verdict.textContent = item.text;
             }
         }
 
-        /* FAQ Accordion Toggle */
-        function toggleFaq(element) {
-            const isActive = element.classList.contains("active");
-            document.querySelectorAll(".faq-item").forEach(item => {
-                item.classList.remove("active");
-                item.querySelector(".faq-toggle").textContent = "+";
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const answer = item.querySelector(".faq-answer");
+            const toggle = button.querySelector(".faq-toggle");
+            const isActive = item.classList.contains("active");
+
+            document.querySelectorAll(".faq-item").forEach(faqItem => {
+                faqItem.classList.remove("active");
+                const faqAnswer = faqItem.querySelector(".faq-answer");
+                if (faqAnswer) {
+                    faqAnswer.hidden = true;
+                }
+                const faqButton = faqItem.querySelector(".faq-question");
+                if (faqButton) {
+                    faqButton.setAttribute("aria-expanded", "false");
+                }
+                const faqToggle = faqItem.querySelector(".faq-toggle");
+                if (faqToggle) {
+                    faqToggle.textContent = "+";
+                }
             });
 
             if (!isActive) {
-                element.classList.add("active");
-                element.querySelector(".faq-toggle").textContent = "−";
+                item.classList.add("active");
+                answer.hidden = false;
+                button.setAttribute("aria-expanded", "true");
+                toggle.textContent = "−";
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const partSelect = document.getElementById("partSelect");
+            if (partSelect) {
+                partSelect.addEventListener("change", checkPart);
+            }
+
+            const backToTop = document.getElementById("backToTop");
+            if (backToTop) {
+                window.addEventListener("scroll", function() {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add("visible");
+                    } else {
+                        backToTop.classList.remove("visible");
+                    }
+                });
+            }
+
+            updateActiveNav();
+        });
+
+        function updateActiveNav() {
+            const sections = document.querySelectorAll("section[id], header[id]");
+            const navLinks = document.querySelectorAll(".nav-link");
+
+            let currentSection = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === "#" + currentSection) {
+                    link.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", updateActiveNav);
+
+        function toggleNav() {
+            const navLinks = document.getElementById("navLinks");
+            const navToggle = document.querySelector(".nav-toggle");
+            navLinks.classList.toggle("open");
+            const isExpanded = navLinks.classList.contains("open");
+            navToggle.setAttribute("aria-expanded", isExpanded);
+            navToggle.textContent = isExpanded ? "✕" : "☰";
+        }
+
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                const navLinks = document.getElementById("navLinks");
+                const navToggle = document.querySelector(".nav-toggle");
+                if (navLinks.classList.contains("open")) {
+                    navLinks.classList.remove("open");
+                    navToggle.setAttribute("aria-expanded", "false");
+                    navToggle.textContent = "☰";
+                }
+            });
+        });
     </script>
+
+    <a href="#main-content" class="back-to-top" id="backToTop" aria-label="Back to top">↑ Top</a>
 </body>
 </html>
