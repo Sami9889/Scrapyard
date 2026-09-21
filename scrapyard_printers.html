@@ -6,7 +6,11 @@
     <meta name="description" content="Scrapyard Printers - Build a real 3D printer almost entirely from junk. A Hack Club YSWS event where you get $250 and strict limits—everything else must be scavenged from e-waste, scrapyards, and flea markets.">
     <meta name="theme-color" content="#ec3750">
     <title>Scrapyard Printers | Hack Club YSWS</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖨️</text></svg>">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         :root {
             --bg: #fffdf5;
             --black: #000000;
@@ -499,6 +503,113 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        .nav-toggle {
+            display: none;
+            background: var(--white);
+            border: var(--border);
+            box-shadow: 3px 3px 0px #000;
+            padding: 0.4rem 0.8rem;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .nav-toggle:hover {
+            background: var(--yellow);
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                flex-wrap: nowrap;
+            }
+        }
+
+        .nav-link.active {
+            background: var(--yellow);
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--hc-red);
+            color: var(--white);
+            border: var(--border);
+            box-shadow: var(--shadow);
+            padding: 0.6rem 1rem;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 50;
+            font-size: 0.9rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #d62d42;
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        @media print {
+            body {
+                background: white;
+                background-image: none;
+                padding: 0;
+            }
+
+            .back-to-top,
+            .nav-toggle,
+            .checker-widget,
+            .faq-section {
+                display: none;
+            }
+
+            .card,
+            .reward-box,
+            footer,
+            .hero {
+                box-shadow: none;
+                border: 1px solid #000;
+                break-inside: avoid;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -507,7 +618,8 @@
     <div class="wrapper">
         <nav aria-label="Main navigation">
             <div class="nav-badge">📍 Hack Club YSWS</div>
-            <div class="nav-links">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks" onclick="toggleNav()" aria-label="Toggle navigation menu">☰</button>
+            <div class="nav-links" id="navLinks">
                 <a href="#rules" class="nav-link">Rules</a>
                 <a href="#checker" class="nav-link">Part Checker</a>
                 <a href="#rewards" class="nav-link">Rewards</a>
@@ -749,7 +861,65 @@
             if (partSelect) {
                 partSelect.addEventListener("change", checkPart);
             }
+
+            const backToTop = document.getElementById("backToTop");
+            if (backToTop) {
+                window.addEventListener("scroll", function() {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add("visible");
+                    } else {
+                        backToTop.classList.remove("visible");
+                    }
+                });
+            }
+
+            updateActiveNav();
+        });
+
+        function updateActiveNav() {
+            const sections = document.querySelectorAll("section[id], header[id]");
+            const navLinks = document.querySelectorAll(".nav-link");
+
+            let currentSection = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === "#" + currentSection) {
+                    link.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", updateActiveNav);
+
+        function toggleNav() {
+            const navLinks = document.getElementById("navLinks");
+            const navToggle = document.querySelector(".nav-toggle");
+            navLinks.classList.toggle("open");
+            const isExpanded = navLinks.classList.contains("open");
+            navToggle.setAttribute("aria-expanded", isExpanded);
+            navToggle.textContent = isExpanded ? "✕" : "☰";
+        }
+
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                const navLinks = document.getElementById("navLinks");
+                const navToggle = document.querySelector(".nav-toggle");
+                if (navLinks.classList.contains("open")) {
+                    navLinks.classList.remove("open");
+                    navToggle.setAttribute("aria-expanded", "false");
+                    navToggle.textContent = "☰";
+                }
+            });
         });
     </script>
+
+    <a href="#main-content" class="back-to-top" id="backToTop" aria-label="Back to top">↑ Top</a>
 </body>
 </html>
